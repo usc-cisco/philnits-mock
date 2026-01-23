@@ -544,8 +544,8 @@
         "options": [
             "It indicates that a large number of bugs may still remain internally.",
             "It indicates that desk-checking and simulation were performed satisfactorily prior to testing. ", 
-            "It indicates that the probability of occurrence of bugs after shipping is low, because the target cumulative number of bugs was reached.", 
-            "It indicates that a large number of bugs may still remain internally."
+            "It indicates that the probability of occurrence of bugs after shipping is low, because the target cumulative number of bugs was reached.",
+            "It indicates that a small number of bugs may still remain internally."
         ],
         "correctAnswer": 0,
         "solution": "## **Explanation:**\n\nThe graph shows the cumulative number of bugs reaching the target value after completing a number of test items. Seeing the graph it shows that the curve is still increasing sharply, suggesting more bugs could still exist internally and reaching the target won't guarantee that all bugs have been found. More bugs will be discovered with more testing.\n\n> [!TIP] \n> Just think of it as a game where the more you play, the more bugs you keep finding. Even though you’ve caught the target number of bugs (X), there are still plenty of bugs waiting to be caught because they keep popping up. This means the game isn't really over yet, and there could be many more bugs hiding. That's why **a)** is the right answer—there are still bugs left, even though you’ve reached your target."

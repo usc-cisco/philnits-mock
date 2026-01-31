@@ -37,7 +37,7 @@ export default function Question({
           Question {currentQuestionNumber} of {totalQuestions}
         </span>
         <h2 className="font-bold text-sm">{id}</h2>
-        <div className="border border-gray-200 rounded-lg overflow-hidden my-4">
+        <div className="border border-border rounded-lg overflow-hidden my-4">
           <Image
             src={`/${compositeImage}`}
             alt="Question and choices"
@@ -48,16 +48,16 @@ export default function Question({
         </div>
         <div className="grid grid-cols-2 gap-2">
           {options.map((option, index) => (
-            <Button key={index} variant="outline" className="text-lg font-semibold" onClick={() => onAnswer(index)}>
+            <Button key={index} variant="outline" className="text-lg font-semibold hover:bg-primary/10 hover:text-foreground" onClick={() => onAnswer(index)}>
               {option}
             </Button>
           ))}
         </div>
         <div className="flex justify-between items-center mt-4">
-          <Button onClick={onGoBack} disabled={isFirstQuestion} variant="outline">
+          <Button onClick={onGoBack} disabled={isFirstQuestion}>
             Go Back
           </Button>
-          <Button onClick={onSubmit} variant="outline">
+          <Button onClick={onSubmit}>
             Submit Early
           </Button>
         </div>
@@ -76,7 +76,7 @@ export default function Question({
         <div className="font-medium">
           <Markdown>{question}</Markdown>
         </div>
-        <div className="border border-gray-200 rounded-lg overflow-hidden my-4">
+        <div className="border border-border rounded-lg overflow-hidden my-4">
           <Image
             src={`/${choiceImage}`}
             alt="Answer choices"
@@ -87,16 +87,16 @@ export default function Question({
         </div>
         <div className="grid grid-cols-2 gap-2">
           {options.map((option, index) => (
-            <Button key={index} variant="outline" className="text-lg font-semibold" onClick={() => onAnswer(index)}>
+            <Button key={index} variant="outline" className="text-lg font-semibold hover:bg-primary/10 hover:text-foreground" onClick={() => onAnswer(index)}>
               {option}
             </Button>
           ))}
         </div>
         <div className="flex justify-between items-center mt-4">
-          <Button onClick={onGoBack} disabled={isFirstQuestion} variant="outline">
+          <Button onClick={onGoBack} disabled={isFirstQuestion}>
             Go Back
           </Button>
-          <Button onClick={onSubmit} variant="outline">
+          <Button onClick={onSubmit}>
             Submit Early
           </Button>
         </div>
@@ -118,16 +118,16 @@ export default function Question({
       </div>
       <div className="grid grid-cols-1 gap-2">
         {options.map((option, index) => (
-          <Button key={index} variant="outline" className="justify-start text-left text-wrap py-4 h-auto font-normal" onClick={() => onAnswer(index)}>
+          <Button key={index} variant="outline" className="justify-start text-left text-wrap py-4 h-auto font-normal hover:bg-primary/10 hover:text-foreground" onClick={() => onAnswer(index)}>
             <Markdown>{option}</Markdown>
           </Button>
         ))}
       </div>
       <div className="flex justify-between items-center mt-4">
-        <Button onClick={onGoBack} disabled={isFirstQuestion} variant="outline">
+        <Button onClick={onGoBack} disabled={isFirstQuestion}>
           Go Back
         </Button>
-        <Button onClick={onSubmit} variant="outline">
+        <Button onClick={onSubmit}>
           Submit Early
         </Button>
       </div>

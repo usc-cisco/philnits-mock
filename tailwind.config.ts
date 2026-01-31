@@ -9,6 +9,14 @@ export default {
   ],
   theme: {
   	extend: {
+  		fontFamily: {
+  			sans: ['var(--font-poppins)', 'system-ui', 'sans-serif'],
+  		},
+  		boxShadow: {
+  			light: '0 0 15px rgba(0, 0, 0, 0.10)',
+  			medium: '1px 1px 3px rgba(0, 0, 0, 0.25)',
+  			strong: '5px 5px 3px rgba(0, 0, 0, 0.25)',
+  		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
@@ -49,7 +57,9 @@ export default {
   				'3': 'hsl(var(--chart-3))',
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
-  			}
+  			},
+  			success: 'hsl(var(--success))',
+  			warning: 'hsl(var(--warning))',
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

@@ -31,7 +31,7 @@ const DEFAULT_PREVIEW_OPTIONS: MarkdownPreviewProps = {
 					alt={alt || 'Question diagram'}
 					width={600}
 					height={400}
-					className="question-diagram my-4 mx-auto border border-gray-200 rounded-lg"
+					className="question-diagram my-4 mx-auto border border-border rounded-lg"
 					{...rest}
 				/>
 			);

@@ -34,9 +34,9 @@ export default function Results({ quizData, userAnswers, onRestart, onNewQuiz, t
     <div className="space-y-4">
       <h2 className="text-2xl font-bold">Quiz Results</h2>
       {isTimeOut ? (
-        <p className="text-xl text-red-600 font-bold">Time&apos;s up!</p>
+        <p className="text-xl text-destructive font-bold">Time&apos;s up!</p>
       ) : (
-        <p className="text-xl text-green-600 font-bold">Quiz completed!</p>
+        <p className="text-xl text-success font-bold">Quiz completed!</p>
       )}
       <p className="text-xl">
         Your score: {score} out of {quizData.length}
@@ -58,7 +58,7 @@ export default function Results({ quizData, userAnswers, onRestart, onNewQuiz, t
       <p className="text-lg font-bold">Review answers</p>
 
       {quizData.map((question, index) => (
-        <div key={index} className={`border p-4 rounded-md ${userAnswers[index] === question.correctAnswer ? 'bg-green-50' : 'bg-red-50'}`}>
+        <div key={index} className={`border p-4 rounded-md ${userAnswers[index] === question.correctAnswer ? 'bg-success/10' : 'bg-destructive/10'}`}>
           <span className="text-sm font-medium bg-primary text-primary-foreground px-2 py-1 rounded-full">
             Question {index + 1} of {quizData.length}
           </span>
@@ -66,7 +66,7 @@ export default function Results({ quizData, userAnswers, onRestart, onNewQuiz, t
           
           {/* Composite Image: Show only the image (no question text) */}
           {question.compositeImage ? (
-            <div className="border border-gray-200 rounded-lg overflow-hidden my-4">
+            <div className="border border-border rounded-lg overflow-hidden my-4">
               <Image
                 src={`/${question.compositeImage}`}
                 alt="Question and choices"
@@ -84,7 +84,7 @@ export default function Results({ quizData, userAnswers, onRestart, onNewQuiz, t
           
           {/* Choice Image: Show after question text */}
           {question.choiceImage && !question.compositeImage && (
-            <div className="border border-gray-200 rounded-lg overflow-hidden my-4">
+            <div className="border border-border rounded-lg overflow-hidden my-4">
               <Image
                 src={`/${question.choiceImage}`}
                 alt="Answer choices"
@@ -132,10 +132,10 @@ export default function Results({ quizData, userAnswers, onRestart, onNewQuiz, t
                     return (
                       <div
                         key={o_index}
-                        className={`w-full border border-gray-200 rounded-md p-4 text-wrap
-                          ${o_index === question.correctAnswer ? 'bg-green-300' :
-                            (o_index === userAnswers[index] ? 'bg-red-300' :
-                            'bg-white'
+                        className={`w-full border border-border rounded-md p-4 text-wrap
+                          ${o_index === question.correctAnswer ? 'bg-success/20' :
+                            (o_index === userAnswers[index] ? 'bg-destructive/20' :
+                            'bg-card'
                             )}
                         `}
                       >

@@ -39,7 +39,7 @@ export default function LandingPage({ onStartQuiz, devModeYear, visualContentCou
     <Card className="w-full max-w-2xl mx-auto">
       <CardHeader>
         <CardTitle className="text-3xl">
-          PhilNITS FE AM Mock Exam {devModeYear && <span className="text-sm text-orange-500 ml-2">(Dev Mode: {devModeYear})</span>}
+          PhilNITS FE AM Mock Exam {devModeYear && <span className="text-sm text-warning ml-2">(Dev Mode: {devModeYear})</span>}
         </CardTitle>
         <CardDescription>
           {devModeYear 
@@ -77,7 +77,7 @@ export default function LandingPage({ onStartQuiz, devModeYear, visualContentCou
               value={devModeYear ? visualContentCount : numQuestions} 
               onChange={onChange}
               disabled={devModeYear ? true : false}
-              className={devModeYear ? "bg-gray-100 cursor-not-allowed" : ""}
+              className={devModeYear ? "bg-muted cursor-not-allowed" : ""}
             />
               <Button className="w-full">
                 Start Quiz

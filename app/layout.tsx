@@ -1,5 +1,14 @@
 import type { Metadata } from "next";
+import { Poppins } from "next/font/google";
 import "./globals.css";
+import Footer from "./components/Footer";
+
+const poppins = Poppins({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  variable: "--font-poppins",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "PhilNITS Mock Exam",
@@ -16,10 +25,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`antialiased`}
-      >
-        {children}
+      <body className={`${poppins.variable} font-sans antialiased min-h-screen flex flex-col`}>
+        <header className="bg-primary text-primary-foreground px-6 py-4">
+          <div className="container mx-auto">
+            <a href="/" className="text-lg font-bold hover:opacity-90 block">
+              PhilNITS FE AM Mock Exam
+            </a>
+          </div>
+        </header>
+        <main className="flex-1 p-4 md:px-6">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );

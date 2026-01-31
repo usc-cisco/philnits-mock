@@ -163,7 +163,7 @@ export default function Quiz() {
         <Card className="w-full max-w-2xl mx-auto">
           <CardHeader>
             <CardTitle>
-              Exam Review Quiz {devModeYear && <span className="text-sm text-orange-500 ml-2">(Dev Mode: {devModeYear})</span>}
+              Exam Review Quiz {devModeYear && <span className="text-sm text-warning ml-2">(Dev Mode: {devModeYear})</span>}
             </CardTitle>
             <CardDescription>
               {devModeYear 

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: "PhilNITS Mock Exam",
   description: "An online PhilNITS FE AM Mock Exam",
   icons: {
-    icon: "/icon.jpg",
+    icon: "/cisco-logo-white.png",
   }
 };
 

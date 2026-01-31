@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useCallback } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button"
 import Question from "@/components/Question"
 import Results from "@/components/Results"
 import Timer from "@/components/Timer"
@@ -34,6 +36,7 @@ export default function Quiz() {
   const [totalTime, setTotalTime] = useState(0)
   const [timeRemaining, setTimeRemaining] = useState(0)
   const [devModeYear, setDevModeYear] = useState<number | null>(null)
+  const [showSubmitDialog, setShowSubmitDialog] = useState(false)
 
   // Initialize dev mode on mount
   useEffect(() => {
@@ -119,9 +122,12 @@ export default function Quiz() {
   }
 
   const handleSubmit = () => {
-    if(confirm("Are you sure?")) {
-      endQuiz()
-    }
+    setShowSubmitDialog(true)
+  }
+
+  const confirmSubmit = () => {
+    setShowSubmitDialog(false)
+    endQuiz()
   }
 
   const restartQuiz = () => {
@@ -201,6 +207,25 @@ export default function Quiz() {
           </CardContent>
         </Card>
       )}
+
+      <Dialog open={showSubmitDialog} onOpenChange={setShowSubmitDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Submit Quiz Early?</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to submit your quiz? You still have time remaining.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="gap-2 sm:gap-0">
+            <Button variant="outline" onClick={() => setShowSubmitDialog(false)}>
+              Cancel
+            </Button>
+            <Button onClick={confirmSubmit}>
+              Yes, Submit
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }

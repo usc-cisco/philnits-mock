@@ -139,22 +139,62 @@ After Phase 2 completes, update the web app:
 1. **Import the new year** in `app/assets/data/index.ts`:
 
    ```typescript
-   import _2025 from '@/assets/data/2025/index.json'
+   import _2026 from '@/assets/data/2026/index.json'
    ```
+
 2. **Add to quizData array**:
 
    ```typescript
    export const quizData: QuizQuestion[] = [
+     ..._2026,  // Add newest year first
      ..._2025,
      ..._2024,
      // ... other years
    ]
    ```
-3. **Test**:
+
+3. **Update year filter** in `app/lib/yearFilter.ts`:
+
+   ```typescript
+   export function getAvailableYears(): string[] {
+     return ['2026', '2025', '2024', '2023', '2022', '2021', '2020', '2019']
+   }
+
+   export function getYearCounts(): Record<string, number> {
+     return {
+       '2026': _2026.length,  // Add this line
+       '2025': _2025.length,
+       // ... rest
+     }
+   }
+
+   export function filterQuestionsByYear(year: string) {
+     if (year === 'all') {
+       return [..._2026, ..._2025, ...]  // Add _2026 here
+     }
+     
+     const yearDataMap: Record<string, any[]> = {
+       '2026': _2026,  // Add this line
+       '2025': _2025,
+       // ... rest
+     }
+   }
+   ```
+
+   **Don't forget to import** at the top of `yearFilter.ts`:
+   ```typescript
+   import _2026 from '@/assets/data/2026/index.json'
+   ```
+
+4. **Test**:
 
    ```bash
    npm run dev
    ```
+
+   - Check landing page shows updated year range (e.g., "2019-2026")
+   - Verify year dropdown includes 2026
+   - Test filtering by selecting 2026
 
 ---
 

@@ -7,11 +7,16 @@ body {
 }
 
 .markdown table th, td {
-  background-color: white;
+  background-color: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+  border: 1px solid hsl(var(--border));
 }
 
 .markdown .code-highlight {
-  background-color: white;
+  background-color: hsl(var(--muted));
+  color: hsl(var(--muted-foreground));
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
 }
 
 .question {

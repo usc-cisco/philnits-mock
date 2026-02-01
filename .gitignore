@@ -22,6 +22,8 @@
 
 # misc
 temp/
+docs/
+.agent/
 .DS_Store
 *.pem
 

@@ -1,41 +1,26 @@
-name: Deployment
+name: Deploy Frontend Build
 
-on: 
+on:
+  workflow_dispatch:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 jobs:
   build:
-    name: Deploy PhilNITS
+    name: Build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Upload file to SSH
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{secrets.SSH_HOST}}
-          username: ${{secrets.SSH_USERNAME}}
-          password: ${{secrets.SSH_PASSWORD}}
-          port: ${{secrets.SSH_PORT}}
-          source: "*"
-          exclude: "./node_modules, ./.git, ./.github, /etc, /lib"
-          target: "~/philnits.dcism.org/"
-          overwrite: true
-
-      - name: Build
+      - name: Clone and Build
         uses: appleboy/ssh-action@v1.2.0
         with:
-          host: ${{secrets.SSH_HOST}}
-          username: ${{secrets.SSH_USERNAME}}
-          password: ${{secrets.SSH_PASSWORD}}
-          port: ${{secrets.SSH_PORT}}
+          host: ${{ secrets.DCISM_HOST }}
+          username: ${{ secrets.DCISM_EMAIL }}
+          password: ${{ secrets.DCISM_PASSWORD }}
+          port: ${{ secrets.SSH_PORT }}
           script: |
-            cd ~/philnits.dcism.org
-            npm install
+            cd philnits-mock
+            git reset --hard && git clean -fd && git pull origin main
+            npm ci
             npm run build
-            npx pm2 delete philnits || true
-            npx pm2 start npm --name 'philnits' -- start 
+            rsync -avz --delete ./dist/ ~/${{ secrets.DCISM_DOMAIN }}/

@@ -8,7 +8,8 @@ import Question from "@/components/Question"
 import Results from "@/components/Results"
 import Timer from "@/components/Timer"
 import LandingPage from "@/components/LandingPage"
-import { quizData, type QuizQuestion } from "@/assets/data" 
+import { quizData, type QuizQuestion } from "@/assets/data"
+import { getAvailableYears, getYearCounts, filterQuestionsByYear, getYearRange } from "@/lib/yearFilter" 
 
 // Developer Mode - For Testing Visual Content
 // Enable via URL parameter: ?dev=2025 (or any year)
@@ -37,10 +38,16 @@ export default function Quiz() {
   const [timeRemaining, setTimeRemaining] = useState(0)
   const [devModeYear, setDevModeYear] = useState<number | null>(null)
   const [showSubmitDialog, setShowSubmitDialog] = useState(false)
+  const [selectedYear, setSelectedYear] = useState<string>("all")
 
   // Initialize dev mode on mount
   useEffect(() => {
     setDevModeYear(getDevModeYear())
+    // Load selected year from localStorage
+    const savedYear = localStorage.getItem("selectedYear")
+    if (savedYear) {
+      setSelectedYear(savedYear)
+    }
   }, [])
 
   const shuffle = (array: QuizQuestion[]) => { 
@@ -51,7 +58,7 @@ export default function Quiz() {
     return array; 
   };
 
-  const startQuiz = useCallback((numQuestions: number) => {
+  const startQuiz = useCallback((numQuestions: number, year?: string) => {
     let questionsToUse: QuizQuestion[]
     
     if (devModeYear) {
@@ -67,9 +74,12 @@ export default function Quiz() {
       console.log(`DEV MODE: Loaded ${visualQuestions.length} visual content questions from ${devModeYear}`)
       console.log('Question IDs:', visualQuestions.map(q => q.id.replace(`${devModeYear}_FE-A_`, 'Q')).join(', '))
     } else {
-      // Normal mode: Shuffle all years
-      const shuffled = shuffle([...quizData])
+      // Normal mode: Filter by year, then shuffle
+      const yearToUse = year || selectedYear
+      const filteredByYear = filterQuestionsByYear(yearToUse)
+      const shuffled = shuffle([...filteredByYear])
       questionsToUse = shuffled.slice(0, numQuestions)
+      console.log(`Loaded ${questionsToUse.length} questions from ${yearToUse === 'all' ? 'all years' : yearToUse}`)
     }
     
     setQuestions(questionsToUse)
@@ -79,7 +89,7 @@ export default function Quiz() {
 
     setTotalTime(totalTime)
     setTimeRemaining(totalTime)
-  }, [devModeYear])
+  }, [devModeYear, selectedYear])
 
   const endQuiz = useCallback(() => {
     setQuizCompleted(true)
@@ -164,6 +174,11 @@ export default function Quiz() {
           onStartQuiz={startQuiz} 
           devModeYear={devModeYear}
           visualContentCount={getVisualContentCount()}
+          availableYears={getAvailableYears()}
+          yearCounts={getYearCounts()}
+          yearRange={getYearRange()}
+          selectedYear={selectedYear}
+          onYearChange={setSelectedYear}
         />
       ) : (
         <Card className="w-full max-w-2xl mx-auto">

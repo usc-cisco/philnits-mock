@@ -50,7 +50,7 @@ const Markdown = ({children}: MarkdownProps) => {
         className='markdown'
         style={{
             background: 'none', 
-            color: 'black'
+            color: 'inherit'
         }}
         source={children}
         {...DEFAULT_PREVIEW_OPTIONS}

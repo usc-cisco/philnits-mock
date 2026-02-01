@@ -9,7 +9,8 @@ export default function HeaderLink() {
       className="text-lg font-bold hover:opacity-90 block"
       onClick={(e) => {
         e.preventDefault();
-        window.location.href = "/";
+        const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+        window.location.href = base ? `${base}/` : "/";
       }}
     >
       PhilNITS FE AM Mock Exam
